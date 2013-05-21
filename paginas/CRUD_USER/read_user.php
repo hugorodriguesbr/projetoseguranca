@@ -12,16 +12,18 @@
     }
     
     //caso for editar ou excluir
-    if(isset($_GET['nv'])){
-        include_once 'paginas/CRUD_USER/create_user.php';
-    }elseif(isset($_GET['ed'])){
-        include_once 'paginas/CRUD_USER/update_user.php';
-    }elseif(isset($_GET['ex'])){
-        include_once 'paginas/CRUD_USER/delete_user.php';
+    if(isset($_GET['ruser'])){
+        if($_GET['ruser'] == "nv"){
+            include_once 'paginas/CRUD_USER/create_user.php';
+        }elseif($_GET['ruser'] == "ed"){
+            include_once 'paginas/CRUD_USER/update_user.php';
+        }elseif($_GET['ruser'] == "ex"){
+            include_once 'paginas/CRUD_USER/delete_user.php';
+        }
     }
 ?> 
     <div>
-        <a href="?menu=users&nv=true">Novo Usuario</a>
+        <a href="?menu=users&ruser=nv">Novo Usuario</a>
     </div>
 <table border="1">
     <thead>
@@ -41,8 +43,8 @@
                 <td><?=$usr->USER_NOME?></td>
                 <td><?=$usr->USER_LOGIN?></td>
                 <td><?=$usr->USER_SENHA?></td>
-                <td><a href="?menu=users&ed=true">ED</a></td>
-                <td><a href="?menu=users&ex=true">EX</a></td>
+                <td><a href="?menu=users&ruser=ed">ED</a></td>
+                <td><a href="?menu=users&ruser=ex">EX</a></td>
             <?php endforeach;?>
         </tr>
     </tbody>

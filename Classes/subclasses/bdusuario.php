@@ -18,7 +18,7 @@ class Classes_subclasses_bdusuario extends Classes_conexao{
        }
     }
     
-    public function login($usuario, $senha){
+    public function autentica($usuario, $senha){
         $result = FALSE;
         if(($usuario != "") && ($senha != "")){
             if($this->conexao){
@@ -53,6 +53,26 @@ class Classes_subclasses_bdusuario extends Classes_conexao{
             $this->msg = "Erro na conexao.";
         }
         return $result;
+    }
+    
+    public function gravauser($usuario, $login, $senha){
+        $result = FALSE;
+        if($this->conexao){
+            $sql_usuario = mysql_query("INSERT PS_USUARIO  
+                                        (USER_NOME, USER_LOGIN, USER_SENHA) Values 
+                                        ({$usuario},{$login},{$senha})");
+            mysql_affected_rows($sql_usuario);
+        }
+        return $result;
+    }
+    
+    public function alterauser($id){
+        
+    }
+    
+    
+    public function deletauser($id){
+        
     }
 
     public function getMsg() {

@@ -3,7 +3,7 @@
         include_once 'Classes/subclasses/bdusuario.php';
         
         $usuario = new Classes_subclasses_bdusuario();
-        $result = $usuario->login($_POST['user'],  sha1($_POST['pswd']));
+        $result = $usuario->autentica($_POST['user'],  sha1($_POST['pswd']));
         
         if($result){
             
