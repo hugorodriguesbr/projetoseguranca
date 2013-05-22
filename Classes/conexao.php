@@ -4,7 +4,7 @@ class Classes_conexao {
     public static $host = "127.0.0.1";
     public static $dbname = "projetoseguranca";
     public static $usuario = "root";
-    public static $password = "root";
+    public static $password = "mhugo";
     public $conexao;
     
     public function conectar(){

@@ -6,7 +6,7 @@ class Classes_subclasses_bdusuario extends Classes_conexao{
     public $conexao;
     public $msg;
     public $login;
-    public $listausers;
+    public $listausers = array();
     
     // na construção já faz a conexao
     public function __construct() { 
@@ -47,7 +47,10 @@ class Classes_subclasses_bdusuario extends Classes_conexao{
         $result = FALSE;
         if($this->conexao){
             $sql_usuario = mysql_query("SELECT * FROM PS_USUARIO");
-            $this->listausers = array(mysql_fetch_object($sql_usuario));
+            while($user = mysql_fetch_object($sql_usuario)){
+                print_r($user);
+                array_push($this->listausers, array($user));
+            }
             $result = TRUE;
         }else{
             $this->msg = "Erro na conexao.";
@@ -58,10 +61,14 @@ class Classes_subclasses_bdusuario extends Classes_conexao{
     public function gravauser($usuario, $login, $senha){
         $result = FALSE;
         if($this->conexao){
-            $sql_usuario = mysql_query("INSERT PS_USUARIO  
-                                        (USER_NOME, USER_LOGIN, USER_SENHA) Values 
-                                        ({$usuario},{$login},{$senha})");
-            mysql_affected_rows($sql_usuario);
+            $sql_usuario = "INSERT INTO PS_USUARIO  
+                                        (USER_ID,USER_NOME, USER_LOGIN, USER_SENHA) Values 
+                                        ('','{$usuario}','{$login}','{$senha}')";
+            if(!mysql_query($sql_usuario)){
+               echo mysql_error();
+            }else{
+                 $result = TRUE;
+            }
         }
         return $result;
     }

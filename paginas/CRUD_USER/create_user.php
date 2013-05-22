@@ -3,8 +3,10 @@
 
     if(isset($_POST['btn_env_user'])){
         $NewUser = new Classes_subclasses_bdusuario();
-        $NewUser->gravauser($_POST['nome'],$_POST['login'],sha1($_POST['senha']));
-        
+        $result = $NewUser->gravauser($_POST['nome'],$_POST['login'],sha1($_POST['senha']));
+        if($result){
+            header("LOCATE: index.php?menu=users");
+        }
         echo "{$NewUser->getMsg()}";
     }
 ?>
@@ -19,7 +21,7 @@
         </div>
         <div>
             <label>Senha</label><br/>
-            <input type="pasword" name="senha">
+            <input type="password" name="senha">
         </div>
         <div>
             <input type="submit" name="btn_env_user" value="salvar">   

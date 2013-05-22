@@ -4,6 +4,7 @@
     
     $usuario = new Classes_subclasses_bdusuario();
     $result = $usuario->listausuarios();
+    print_r($result);exit;
     if($result){
         $array_users = $usuario->getListausers();
     }
